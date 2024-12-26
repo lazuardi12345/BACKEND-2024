@@ -11,7 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 // Menggunakan routing dari routes/api.js
 app.use("/", apiRoutes);
 
-// Menjalankan server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// mendefinisikan port
+app.listen(3000, () => 
+  console.log('Server running at http://localhost:3000'));
