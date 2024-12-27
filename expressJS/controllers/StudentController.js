@@ -87,12 +87,12 @@ class StudentController {
         });
       }
 
-      const updatedStudent = await Student.updateById(id, { nama, nim, email, jurusan });
-
-      if (!updatedStudent) {
+      const student = await Student.findById(id);
+      if (!student) {
         return res.status(404).json({ message: "Student tidak ditemukan" });
       }
 
+      const updatedStudent = await Student.update(id, { nama, nim, email, jurusan });
       res.status(200).json({
         message: `Berhasil mengupdate student id ${id}`,
         data: updatedStudent,
@@ -111,12 +111,13 @@ class StudentController {
   async destroy(req, res) {
     try {
       const { id } = req.params;
-      const deleted = await Student.deleteById(id);
+      const student = await Student.findById(id);
 
-      if (!deleted) {
+      if (!student) {
         return res.status(404).json({ message: "Student tidak ditemukan" });
       }
 
+      await Student.delete(id);
       res.status(200).json({
         message: `Berhasil menghapus student id ${id}`,
       });
